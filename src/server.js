@@ -1,16 +1,39 @@
-// Pouco utilziado hoje em dia, o CommonJS, padrão de importação utilizando o require
-//const http = require('http')
-//ESModule é o mais utilizado atualmente, com import/export, porém não suportado por padrão pelo node.js, 
-//Por isso mudamos o type:"commonjs" para type:"module" no package.json
 import http from 'http'
 
+//Rotas no node.js
 /**
- * @param request: É a requisição de quem estiver utilizando o servidor, para pegar informações por exemplo
- * @param response: É a resposta dada pelo servidor para o cliente
+ * CRUD de rotas para o usuário
+ * Criar usuários
+ * Listar usuários
+ * Editar usuários
+ * Remover usuários
+ * 
+ * HTTP
+ * * Métodos HTTP: GET / POST / PUT / PATCH / DELETE 
+ * * URL
+ * 
+ * GET para buscar um recurso
+ * POST criar recurso
+ * PUT editar um recurso
+ * PATCH editar uma informação específica de um recurso
+ * 
+ * Exemplo de diferença entre PUT e PATCH:
+ * Ao atualizar por exemplo o perfil inteiro, utilizamos o PUT, podemos mudar várias informações, nome, foto, email.
+ * Já o PATCH, por exemplo, se o usuário quer receber uma notificação, ou não, é uma informação específica para ser atualizada.
  */
-const server = http.createServer((request, response) => {
-  return response.end("Hello World")
+
+const server = http.createServer((req, res) => {
+  const { method, url } = req
+
+  if (method == 'GET' && url == '/users') {
+    return res.end("Listagem de usuários")
+  }
+
+  if (method == 'POST' && url == '/users') {
+    return res.end("Criação de usuários")
+  }
+
+  return res.end("Hello World")
 })
 
-//Atrelando a porta ao server
 server.listen(3000)
