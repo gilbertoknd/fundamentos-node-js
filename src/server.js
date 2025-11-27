@@ -1,4 +1,5 @@
 import http from "http";
+import { randomUUID } from "crypto";
 import { json } from "./middlewares/json.js";
 import { Database } from "./database.js";
 
@@ -19,7 +20,7 @@ const server = http.createServer(async (req, res) => {
     const { name, email } = req.body;
 
     const user = {
-      id: 1,
+      id: randomUUID(), //Alterando para gerar um ID único para cada usuário pelo crypto
       name,
       email,
     };
